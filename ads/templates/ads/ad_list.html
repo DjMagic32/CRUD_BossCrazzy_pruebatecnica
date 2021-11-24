@@ -1,0 +1,54 @@
+{% extends "base_menu.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+<section class="section_list">
+  
+  <p>
+    {% if ad_list %}
+  <ul>
+    {% for ad in ad_list %}
+    <li>
+      <!-- ELEMENTO DE LA LISTA -->
+      <div class="movie-item-style-2">
+        <img src="media/{{ad.thumbnail}}" alt="">
+        <div class="mv-item-infor">
+          <h6><a href="{% url 'ads:ad_detail'  ad.id %}">{{ad.song}} <span>({{ad.artista}})</span></a></h6>
+          <small>
+            {% if ad.owner.username %}
+            posted by {{ ad.owner.username }}
+            {% endif %}
+            {{ ad.natural_updated }}
+          </small>
+          <p class="describe">
+            {% if ad.owner_id == user.id %}
+            <!-- EDITAR O BORRAR ELEMENETO DE LA LISTA -->
+            <a href="{% url 'ads:ad_update' ad.id %}">Edit</a> | <a href="{% url 'ads:ad_delete' ad.id %}">Delete</a>
+          </p>
+        </div>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>There are no Ads in the database.</p>
+  {% endif %}
+  </p>
+</section>
+
+<!-- SI EL USUARIO NO SE LOGEA -->
+{% else %}
+<section class="content_section">
+  <div>
+    <div><span id="barnertitle">welcome to the jungle</span></div>
+    <div id="titulo-principal"><span id="titulop1">Boss</span><span id="titulop2">Crazzy</span></div><br>
+    <div id="div-login-barner">
+      <button id="boton-login"><a id="login-barner" href="{% url 'login' %}?next={% url 'ads:all' %}">Login</a></button>
+    </div>
+
+  </div>
+</section>
+
+{% endif %}
+
+{% endblock %}

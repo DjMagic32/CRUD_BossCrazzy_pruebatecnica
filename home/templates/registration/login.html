@@ -1,0 +1,25 @@
+{% extends "base_bootstrap.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+
+  <div class="content_section2">
+    <div id="div-formulario">
+      <form id="formulario" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="boton-form">
+          <input type="submit" class="btn btn-primary" value="Login" />
+          <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+{% endblock %}

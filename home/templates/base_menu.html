@@ -1,0 +1,29 @@
+{% extends "base_bootstrap.html" %}
+{% block navbar %}
+{% load app_tags %}
+{% load static %}
+{% url 'ads' as ads %}
+<header>
+    <div class="container-nav">
+        <nav class="nav_checkbox">
+            <a href="{% url 'ads:all' %}" class="logo"><h2>Boss<span>Crazzy</span></h2></a>
+            <input type="checkbox" id="tab-nav" class="tab-nav">
+            <label for="tab-nav" class="label">
+                <div class="burger"></div>
+                <div class="burger"></div>
+                <div class="burger"></div>
+            </label>
+            <ul class="content_nav">
+                {% if user.is_authenticated %}
+              <li><a class="active" href="{% url 'ads:all' %}">Home</a></li>
+              <li><a href="{% url 'ads:ad_create' %}">New Song</a></li>
+              <li><a href="{% url 'logout' %}?next={% url 'ads:all' %}">Logout</a></li>
+              {% else %}
+              <li id="linkbarner"><a href="{% url 'login' %}?next={% url 'ads:all' %}">Login</a></li>
+              {% endif %}
+            </ul>
+          </nav>
+    </div>
+</header>
+
+{% endblock %}

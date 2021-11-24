@@ -1,0 +1,22 @@
+{% extends "base_menu.html" %}
+{% load humanize %}
+<!-- https://docs.djangoproject.com/en/3.0/ref/contrib/humanize -->
+{% load embed_video_tags %}
+{% block content %}
+<br><br><br>
+
+<section class="content_section4">
+  <h1 id="div_spandetail"><span id="span_detail">{{ad.song}}  ({{ad.artista}})</span></h1>
+    <div class="video_detail">
+      {% video ad.urlvideo as my_video %}
+      {% video my_video %}
+      {% endvideo %}
+      <br>
+
+      {{ad.content}}
+      <div>
+      <p></p>
+      </div>
+    </div>
+</section>
+{% endblock %}
